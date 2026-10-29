@@ -1,7 +1,9 @@
 import random
 
 class cell:
-    def __init__(self):
+    def __init__(self,y,x):
+        self.y = y
+        self.x = x
         self.upWall = True
         self.rightWall = True
         self.lowWall = True
@@ -17,49 +19,55 @@ directions = [
 nbrow = 10
 nbcol = 10
 
-grid = [[cell for y in range(nbrow)] for x in range(nbcol)]
-start = grid[0][random.randint(0,nbcol)]
-queue = [start]
+grid = [[cell(y,x) for x in range(nbcol)] for y in range(nbrow)]
+start = grid[0][random.randrange(0,nbcol)]
+chain = [start]
 
 
-def create(queue, grid, y, x):
+def create(queue, grid, current):
+    print("Current:", (current.y, current.x))
+    print("Queue:", [(c.y, c.x) for c in queue])
+    print("------------------------------")
     if len(queue) == 0:
         return grid
     else:
-#
+       # for cell in queue:
+       #     print((cell.y,cell.x))
         breeze = []
+
         for direction in directions:
-            j = direction[0] + y
-            i = direction[1] + x
-            if grid[j][i] not in queue and x < len(grid[0]) and y < len(grid):
-                breeze.append[direction]
+            j = direction[0] + current.y
+            i = direction[1] + current.x
+            if 0<= current.x < len(grid[0])-1 and 0 <= current.y < len(grid)-1 and grid[j][i] not in queue:
+                breeze.append(direction)
         nextBreeze = random.choice(breeze)
-        b = nextBreeze[0] + y
-        a = nextBreeze[1] + x
+        b = nextBreeze[0] + current.y
+        a = nextBreeze[1] + current.x
 
         voisin = grid[j][i]
 
-        if nextbreeze == direction[0]:
-            grid[y][x].upWall = False
+        if nextBreeze == directions[0]:
+            current.upWall = False
             voisin.lowWall = False
-        if nextbreeze == direction[1]:
-            grid[y][x].rightWall = False
+        if nextBreeze == directions[1]:
+            current.rightWall = False
             voisin.leftWall = False
-        if nextbreeze == direction[2]:
-            grid[y][x].lowWall = False
+        if nextBreeze == directions[2]:
+            current.lowWall = False
             voisin.upWall = False
-        if nextbreeze == direction[3]:
-            grid[y][x].leftWall = False
+        if nextBreeze == directions[3]:
+            current.leftWall = False
             voisin.rightWall = False
         queue.append(voisin)
 
         for direction in directions:
             verif = []
-            j = direction[0] + y
-            i = direction[1] + x
+            j = direction[0] + current.y
+            i = direction[1] + current.x
             verif.append(grid[j][i])
         if len(verif) == 3:
-            queue.pop(grid[y][x])
+            queue.pop(current)
 
-        return create(queue, voisin, b, a)
+        return create(queue, grid, voisin)
 
+create(chain, grid, start)
