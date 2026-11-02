@@ -1,4 +1,5 @@
 import random
+from maze_display import display_maze
 
 class cell:
     def __init__(self,y,x):
@@ -17,8 +18,8 @@ directions = [
     (0,-1)]  #left
 
 
-nbrow = 5
-nbcol = 50
+nbrow = 20
+nbcol = 20
 
 grid = [[cell(y,x) for x in range(nbcol)] for y in range(nbrow)]
 start = grid[0][random.randrange(0,nbcol)]
@@ -76,3 +77,7 @@ def create(queue, grid):
 
 
 create(chain, grid)
+
+display_maze(grid)
+
+
