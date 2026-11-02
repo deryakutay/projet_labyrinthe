@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 
 import random
+=======
+import random
+from maze_display import display_maze
+>>>>>>> b2893ad (nettoyage)
 
 class cell:
     def __init__(self, y, x):
@@ -19,11 +24,27 @@ directions = [
     (0, -1)   # left
 ]
 
+<<<<<<< HEAD
 nbrow = 4
 nbcol = 4
 
 grid = [[cell(y, x) for x in range(nbcol)] for y in range(nbrow)]
 start = grid[0][random.randrange(0, nbcol)]
+=======
+nbrow = 20
+nbcol = 20
+
+<<<<<<<< HEAD:random.py
+nbrow = 4
+nbcol = 4
+
+grid = [[cell(y,x) for x in range(nbcol)] for y in range(nbrow)]
+start = grid[0][random.randrange(0,nbcol)]
+========
+grid = [[cell(y, x) for x in range(nbcol)] for y in range(nbrow)]
+start = grid[0][random.randrange(0, nbcol)]
+>>>>>>>> b2893ad (nettoyage):lastOrRandom.py
+>>>>>>> b2893ad (nettoyage)
 start.visited = True
 chain = [start]
 
@@ -32,6 +53,7 @@ def create(queue, grid):
     if not queue:
         return grid
     else:
+<<<<<<< HEAD
         breeze = []
 
         compteur = random.randrange(0, 4)
@@ -41,6 +63,23 @@ def create(queue, grid):
             print("randed")
         else:
             current = queue[-1]
+=======
+<<<<<<<< HEAD:random.py
+        current = queue[random.randrange(0,len(queue))]
+========
+>>>>>>>> b2893ad (nettoyage):lastOrRandom.py
+        breeze = []
+
+        tirage = random.randrange(0, 4)
+
+        if (tirage == 1):
+            index = random.randrange(0, len(queue))
+            print("randed")
+        else:
+            index = -1
+
+        current = queue[index]
+>>>>>>> b2893ad (nettoyage)
 
         print("Current:", (current.y, current.x))
         print("Queue:", [(c.y, c.x) for c in queue])
@@ -54,10 +93,21 @@ def create(queue, grid):
                     and 0 <= j < len(grid)
                     and not grid[j][i].visited):
                 breeze.append(direction)
+<<<<<<< HEAD
 
         if not breeze:
             queue.pop()
             return create(queue, grid)
+=======
+        if not breeze:
+<<<<<<<< HEAD:random.py
+            queue.pop()
+            return create(queue,grid)
+========
+            queue.pop(index)
+            return create(queue, grid)
+>>>>>>>> b2893ad (nettoyage):lastOrRandom.py
+>>>>>>> b2893ad (nettoyage)
 
         nextBreeze = random.choice(breeze)
         b = nextBreeze[0] + current.y
@@ -86,6 +136,7 @@ def create(queue, grid):
         return create(queue, grid)
 
 
+<<<<<<< HEAD
 create(chain, grid)
 
 
@@ -122,4 +173,13 @@ def display_maze(grid):
     bottom += "+"
     print(bottom)
 
+=======
+<<<<<<<< HEAD:random.py
+
+
+========
+>>>>>>>> b2893ad (nettoyage):lastOrRandom.py
+create(chain, grid)
+
+>>>>>>> b2893ad (nettoyage)
 display_maze(grid)
