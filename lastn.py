@@ -1,9 +1,6 @@
-
 import random
-<<<<<<< HEAD
-=======
 from maze_display import display_maze
->>>>>>> 0bdb6d7 (ça me semble bien :))
+
 
 class cell:
     def __init__(self, y, x):
@@ -23,13 +20,9 @@ directions = [
     (0, -1)   # left
 ]
 
-<<<<<<< HEAD
-nbrow = 10
-nbcol = 10
-=======
 nbrow = 20
 nbcol = 20
->>>>>>> 0bdb6d7 (ça me semble bien :))
+
 
 grid = [[cell(y, x) for x in range(nbcol)] for y in range(nbrow)]
 start = grid[0][random.randrange(0, nbcol)]
@@ -42,18 +35,10 @@ def create(queue, grid):
         return grid
     else:
         breeze = []
-<<<<<<< HEAD
-        n = 5
-        if (n < len(queue)):
-            current = queue[random.randrange(len(queue)-n, len(queue))]
-
-        else:
-            current = queue[-1]
-=======
         n = 20
-        index = random.randrange(max(0, len(queue)-n), len(queue))
+        index = random.randrange(max(0, len(queue) - n), len(queue))
         current = queue[index]
->>>>>>> 0bdb6d7 (ça me semble bien :))
+
 
         print("Current:", (current.y, current.x))
         print("Queue:", [(c.y, c.x) for c in queue])
@@ -69,11 +54,7 @@ def create(queue, grid):
                 breeze.append(direction)
 
         if not breeze:
-<<<<<<< HEAD
-            queue.pop()
-=======
             queue.pop(index)
->>>>>>> 0bdb6d7 (ça me semble bien :))
             return create(queue, grid)
 
         nextBreeze = random.choice(breeze)
@@ -105,41 +86,5 @@ def create(queue, grid):
 
 create(chain, grid)
 
-<<<<<<< HEAD
 
-
-def display_maze(grid):
-    nbrow = len(grid)
-    nbcol = len(grid[0])
-
-    for y in range(nbrow):
-        # Affichage des murs du haut
-        top = ""
-        for x in range(nbcol):
-            top += "+"
-            top += "---" if grid[y][x].upWall else "   "
-        top += "+"
-
-        print(top)
-
-        # Affichage des murs latéraux
-        middle = ""
-        for x in range(nbcol):
-            middle += "|" if grid[y][x].leftWall else " "
-            middle += "   "
-
-        middle += "|" if grid[y][nbcol - 1].rightWall else " "
-        print(middle)
-
-    # Affichage du bas de la dernière ligne
-    bottom = ""
-    for x in range(nbcol):
-        bottom += "+"
-        bottom += "---" if grid[nbrow - 1][x].lowWall else "   "
-
-    bottom += "+"
-    print(bottom)
-
-=======
->>>>>>> 0bdb6d7 (ça me semble bien :))
 display_maze(grid)
