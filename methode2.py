@@ -17,8 +17,8 @@ directions = [
     (0,-1)]  #left
 
 
-nbrow = 10
-nbcol = 10
+nbrow = 4
+nbcol = 4
 
 grid = [[cell(y,x) for x in range(nbcol)] for y in range(nbrow)]
 start = grid[0][random.randrange(0,nbcol)]
@@ -27,13 +27,10 @@ chain = [start]
 
 
 def create(queue, grid):
-
     if not queue:
-        return
-
+        return grid
     else:
-        n = 4
-        current = queue[-1]
+        current = queue[random.randrange(0,len(queue))]
         breeze = []
         print("Current:", (current.y, current.x))
         print("Queue:", [(c.y, c.x) for c in queue])
@@ -45,20 +42,8 @@ def create(queue, grid):
 
             if (0<= i < len(grid[0]) and 0 <= j < len(grid) and not grid[j][i].visited):
                 breeze.append(direction)
-
         if not breeze:
-            if len(queue) <= 1:
-                return
-
-            if len(queue) <= n:
-                lastn = len(queue)-1
-
-            else:
-                lastn = random.randrange(n,len(queue))
-
-            for i in range(lastn):
-                queue.pop()
-
+            queue.pop()
             return create(queue,grid)
 
         nextBreeze = random.choice(breeze)
@@ -86,5 +71,8 @@ def create(queue, grid):
         queue.append(voisin)
 
         return create(queue, grid)
+
+
+
 
 create(chain, grid)
