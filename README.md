@@ -1,15 +1,15 @@
 # Projet Labyrinthe
 
-Projet de troisième année en Génie Mathématique à l’INSA Rouen Normandie. Les scripts Python génèrent des labyrinthes rectangulaires avec l’algorithme récursif *Growing Tree*. Le projet compare les formes obtenues en changeant la règle de sélection des cellules actives.
+Ce dépôt a été créé pour le projet Labyrinthe de la Vague 1, réalisé en troisième année en Génie Mathématique à l’INSA Rouen Normandie. Les scripts Python génèrent des labyrinthes rectangulaires avec l’algorithme récursif *Growing Tree*. Le projet compare les formes obtenues en changeant la règle de sélection des cellules actives.
 
 ## Démarrage rapide
 
-Les scripts utilisent Python 3 et sa bibliothèque standard.
+Pour générer et résoudre un labyrinthe, exécutez le script de résolution avec Python 3. Les générateurs utilisent le module `random` de la bibliothèque standard.
 
 ```bash
 git clone https://github.com/deryakutay/projet_labyrinthe.git
 cd projet_labyrinthe
-python3 theMostRecent.py
+python3 resolution_affichage_de_solution.py
 ```
 
 Les scripts de génération affichent les étapes de l’algorithme, puis le labyrinthe en ASCII dans le terminal. La grille fait 20 × 20 par défaut. Pour changer ses dimensions, modifiez `nbrow` (lignes) et `nbcol` (colonnes) dans le script choisi.
@@ -31,11 +31,19 @@ Chaque cellule représente un sommet et chaque passage représente une arête. C
 
 ## Résolution automatique
 
-```bash
-python3 resolution_affichage_de_solution.py
+Le [script de résolution](resolution_affichage_de_solution.py) importe `lastOrRandom` par défaut, récupère la grille générée (`lastOrRandom.grid`), puis cherche le chemin du coin supérieur gauche au coin inférieur droit. Il écarte successivement les impasses en préservant ces deux cellules. Les cellules restantes forment le chemin, marqué par des `o` dans l’affichage final.
+
+### Changer de méthode de génération
+
+Dans `resolution_affichage_de_solution.py`, modifiez les deux lignes au début du fichier. Par exemple, pour utiliser la méthode `lastn`, écrivez ceci.
+
+```python
+import lastn
+
+grid = lastn.grid
 ```
 
-Le [script de résolution](resolution_affichage_de_solution.py) génère un labyrinthe avec `lastOrRandom.py`, puis cherche le chemin du coin supérieur gauche au coin inférieur droit. Il écarte successivement les impasses en préservant ces deux cellules. Les cellules restantes forment le chemin, marqué par des `o` dans l’affichage final.
+Relancez ensuite le script de résolution.
 
 ## Auteurs
 
